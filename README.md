@@ -24,9 +24,14 @@ function draw() {
 - adding transparency so when hovered over object it plays more into the "torch" effect
 - order of operations is considered because if this was placed AFTER the 'eyes'
 - before 'eyes'
+
 <img width="91" alt="image" src="https://github.com/user-attachments/assets/2908e8c0-9a76-491e-ac57-163adc30181f" />
+
+
 - versus after 'eyes' which makes it a little blurry and milky, taking away from the effect
+
 <img width="85" alt="image" src="https://github.com/user-attachments/assets/8ea33779-8c6c-4a55-9d6e-6716a1305aa6" />
+
 - mouse XY to follow user's mouse, this creates a more direct interactive experience in "forcing" the user to interact with the piece
 ```
  fill(255, 255, 255, 150);
