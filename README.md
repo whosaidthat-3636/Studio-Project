@@ -56,6 +56,28 @@ function draw() {
   ellipse(280, 280, 10, 10);
 ```
 
+## Button
+- REMINDEIHEARE HI: have mousePressed and **this** be executed
+- button to only appear when mouseXY is directed at a certain coordinate
+- this means it could also be AWAY from the button and it would appear, i thought the idea was interesting and could be experimented with down the line
+<img width="162" alt="image" src="https://github.com/user-attachments/assets/b4f75c49-f8bb-46e1-9793-7ae998a0672f" />
+
+
+```
+function setup() {
+  createCanvas(500, 400);
+  button = createButton('Oh, you found me...');
+  button.position(250, 310);
+  button.hide();
+
+ let d = dist(mouseX, mouseY, 305, 310); 
+
+  if (d < 50) { // If close enough, show button
+    button.show();
+  } else {
+    button.hide();
+  }
+```
 
 
 
