@@ -40,7 +40,7 @@ function draw() {
 
 ## Eyes
 - writing individual
-- i acknowledge that this could've been written in an array however this works for me as opposed to an array
+- **i acknowledge that this could've been written in an array however this works for me as opposed to an array
 - fill over certain ellipses to obtain color
 ```
   ellipse(70, 70, 95, 58);
@@ -64,6 +64,8 @@ function draw() {
 
 
 ```
+let button;
+
 function setup() {
   createCanvas(500, 400);
   button = createButton('Oh, you found me...');
@@ -79,5 +81,36 @@ function setup() {
   }
 ```
 
+## Torch effect
+- Eyes
+- creating an array for the ellipses rather than individually writing code
+```
+let eyes = [
+    { x: 70, y: 70, w: 95, h: 58 },
+    { x: 280, y: 280, w: 100, h: 50 },
+    { x: 420, y: 170, w: 110, h: 70 }
+  ];
+```
+- writing loop to go through each of the array
+- if function based of mouse position, if mouse if within the range ellipse would appear
+```
+ for (let i = 0; i < eyes.length; i++) {
+    let eye = eyes[i];  
+    let d = dist(mouseX, mouseY, eye.x, eye.y);
+    if (d < 70) { // Only show if within torch range
+      fill(255);
+      ellipse(eye.x, eye.y, eye.w, eye.h);
+```
 
+
+```
+ fill(0);
+      if (eye.x === 70) {
+        ellipse(60, 70, 50, 50);
+        ellipse(90, 70, 30, 30);
+      } else if (eye.x === 280) {
+        ellipse(280, 280, 45, 35);
+        fill(255, 0, 0);
+        ellipse(280, 280, 10, 10);
+```
 
