@@ -82,7 +82,7 @@ function setup() {
 ```
 
 ## Torch effect
-- Eyes
+### Eyes
 - creating an array for the ellipses rather than individually writing code
 ```
 let eyes = [
@@ -101,10 +101,17 @@ let eyes = [
       fill(255);
       ellipse(eye.x, eye.y, eye.w, eye.h);
 ```
-
+- if the current position of eye is EXACTLY 70
+  * draw two ellipses which makes up the eye, pupil at (60, 70), overall eyeshape at (90, 70)
+- else if eye is at 280
+  * draw two ellipse one as the black pupil
+  * the other smaller red pupil
+- if conditions are unfulfilled and position is at 420
+  * two ellipses would be drawn at the almost the same position
+  * the two ellipses overlap
 
 ```
- fill(0);
+fill(0);
       if (eye.x === 70) {
         ellipse(60, 70, 50, 50);
         ellipse(90, 70, 30, 30);
@@ -112,5 +119,28 @@ let eyes = [
         ellipse(280, 280, 45, 35);
         fill(255, 0, 0);
         ellipse(280, 280, 10, 10);
+      } else if (eye.x === 420) {
+        ellipse(420, 155, 45, 35);
+        ellipse(420, 185, 45, 35);
+      }
 ```
+### Button
+
+```
+ let showButton = 0;
+
+} else if (eye.x === 280) {
+        ellipse(280, 280, 45, 35);
+        fill(255, 0, 0);
+        ellipse(280, 280, 10, 10);
+        showButton = 1;
+
+  if (showButton) {
+    button.show();
+  } else {
+    button.hide();
+  }
+}
+```
+
 
