@@ -168,7 +168,42 @@ function draw() {
 ```
 
 ## Iteration 2
-sigh
+### Line
+- change in vision
+- replacing ellipses with line
+- ellipses that act as "torch" remains
+- I initially changed the if function for torch range
+  * as lines take up lesser surface area so it makes sense for it to be closer
+  * however, it fails to reach the button which means the button disappears past the point where my cursor is at in the picture
+  * so 50 remains
+<img width="184" alt="image" src="https://github.com/user-attachments/assets/05e02353-90a6-4d10-9633-dafe7ca09d9b" />
+- had trouble with writing the line that accounts for the array and asked ChatGPT with the prompt ""
+
+```
+for (let i = 0; i < eyes.length; i++) {
+      let eye = eyes[i];
+      let d = dist(mouseX, mouseY, eye.x, eye.y);
+      if (d < 50) { // Only show if within torch range
+        stroke(255); // White lines for the eyes
+        line(eye.x - eye.length / 2, eye.y, eye.x + eye.length / 2, eye.y); 
+
+        if (eye.x === 70) {
+          line(60, 70, 100, 70); 
+          line(90, 70, 120, 70); 
+        } else if (eye.x === 280) {
+          line(280, 280, 280 + 50, 280); 
+          stroke(255, 0, 0); 
+          point(280, 280); 
+          showButton = 1;
+        } else if (eye.x === 420) {
+          line(420, 155, 420 + 45, 155); 
+          line(420, 185, 420 + 45, 185);
+        }
+      }
+    }
+
+```
+
 
 
 
