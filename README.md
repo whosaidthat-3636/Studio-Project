@@ -57,7 +57,6 @@ function draw() {
 ```
 
 ## Button
-- REMINDEIHEARE HI: have mousePressed and **this** be executed
 - button to only appear when mouseXY is directed at a certain coordinate
 - this means it could also be AWAY from the button and it would appear, i thought the idea was interesting and could be experimented with down the line
 <img width="162" alt="image" src="https://github.com/user-attachments/assets/b4f75c49-f8bb-46e1-9793-7ae998a0672f" />
@@ -68,7 +67,7 @@ let button;
 
 function setup() {
   createCanvas(500, 400);
-  button = createButton('Oh, you found me...');
+  button = createButton('...');
   button.position(250, 310);
   button.hide();
 
@@ -124,8 +123,8 @@ fill(0);
         ellipse(420, 185, 45, 35);
       }
 ```
-### Button
-
+### Button appearing 
+- the previous code had to be updated as i wanted it to appear based on the ellipse it was near to
 ```
  let showButton = 0;
 
@@ -142,5 +141,33 @@ fill(0);
   }
 }
 ```
+
+### Button mousePressed
+- the idea was to have it act as a light switch
+- tentative condition: button pressed, all ellipses and button disappear -> replaced with white canvas
+```
+let button;
+let buttonPressed = 0; // 0 = normal, 1 = button pressed
+
+function setup() {
+  createCanvas(500, 400);
+  button = createButton('Oh, you found me...');
+  button.position(280, 320); // Below the red-pupil eye
+  button.hide(); // Start hidden
+  button.mousePressed(() => {
+    buttonPressed = 1; // Change state when button is pressed
+  });
+}
+
+function draw() {
+  if (buttonPressed === 1) {
+    background(255); // Change background to white
+    button.hide(); // Hide button after it's pressed
+  } else {
+  background(0);
+```
+
+
+
 
 
