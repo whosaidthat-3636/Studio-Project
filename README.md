@@ -147,15 +147,15 @@ fill(0);
 - tentative condition: button pressed, all ellipses and button disappear -> replaced with white canvas
 ```
 let button;
-let buttonPressed = 0; // 0 = normal, 1 = button pressed
+let buttonPressed = 0; 
 
 function setup() {
   createCanvas(500, 400);
   button = createButton('Oh, you found me...');
   button.position(280, 320); // Below the red-pupil eye
-  button.hide(); // Start hidden
+  button.hide(); 
   button.mousePressed(() => {
-    buttonPressed = 1; // Change state when button is pressed
+    buttonPressed = 1; 
   });
 }
 
