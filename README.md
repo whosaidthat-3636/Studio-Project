@@ -18,8 +18,8 @@ function setup() {
 function draw() {
   background(0);}
 ```
-
-## Torch
+## Iteration 1
+### Torch
 - fourth parameter is transparency value
 - adding transparency so when hovered over object it plays more into the "torch" effect
 - order of operations is considered because if this was placed AFTER the 'eyes'
@@ -38,7 +38,7 @@ function draw() {
   ellipse(mouseX, mouseY, 80, 80);
 ```
 
-## Eyes
+### Eyes
 - writing individual
 - **i acknowledge that this could've been written in an array however this works for me as opposed to an array
 - fill over certain ellipses to obtain color
@@ -56,7 +56,7 @@ function draw() {
   ellipse(280, 280, 10, 10);
 ```
 
-## Button
+### Button
 - button to only appear when mouseXY is directed at a certain coordinate
 - this means it could also be AWAY from the button and it would appear, i thought the idea was interesting and could be experimented with down the line
 <img width="162" alt="image" src="https://github.com/user-attachments/assets/b4f75c49-f8bb-46e1-9793-7ae998a0672f" />
@@ -80,8 +80,8 @@ function setup() {
   }
 ```
 
-## Torch effect
-### Eyes
+### Torch effect
+#### Eyes
 - creating an array for the ellipses rather than individually writing code
 ```
 let eyes = [
@@ -123,7 +123,7 @@ fill(0);
         ellipse(420, 185, 45, 35);
       }
 ```
-### Button appearing 
+#### Button appearing 
 - the previous code had to be updated as i wanted it to appear based on the ellipse it was near to
 ```
  let showButton = 0;
@@ -142,7 +142,7 @@ fill(0);
 }
 ```
 
-### Button mousePressed
+#### Button mousePressed
 - the idea was to have it act as a light switch
 - tentative condition: button pressed, all ellipses and button disappear -> replaced with white canvas
 ```
@@ -167,6 +167,8 @@ function draw() {
   background(0);
 ```
 
+## Iteration 2
+sigh
 
 
 
