@@ -172,18 +172,18 @@ function draw() {
 - change in vision
 - replacing ellipses with line
 - ellipses that act as "torch" remains
-- I initially changed the if function for torch range
+- I initially changed the value for the if function for torch range
   * as lines take up lesser surface area so it makes sense for it to be closer
-  * however, it fails to reach the button which means the button disappears past the point where my cursor is at in the picture
-  * so 50 remains
+  * however, it fails to reach the button which means the button disappears past the point where my cursor is at in the picture therefore altered to 55 for it to be easily used
 <img width="184" alt="image" src="https://github.com/user-attachments/assets/05e02353-90a6-4d10-9633-dafe7ca09d9b" />
+
 - had trouble with writing the line that accounts for the array and asked ChatGPT with the prompt ""
 
 ```
 for (let i = 0; i < eyes.length; i++) {
       let eye = eyes[i];
       let d = dist(mouseX, mouseY, eye.x, eye.y);
-      if (d < 50) { // Only show if within torch range
+      if (d < 60) { // Only show if within torch range
         stroke(255); // White lines for the eyes
         line(eye.x - eye.length / 2, eye.y, eye.x + eye.length / 2, eye.y); 
 
@@ -203,6 +203,11 @@ for (let i = 0; i < eyes.length; i++) {
     }
 
 ```
+
+### Changing button condition
+- inspo [https://github.com/ivysone/Will-you-be-my-Valentine-]
+- was inspired by this
+- 
 
 
 
