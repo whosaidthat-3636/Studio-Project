@@ -207,8 +207,24 @@ for (let i = 0; i < eyes.length; i++) {
 ### Changing button condition
 - inspo [https://github.com/ivysone/Will-you-be-my-Valentine-]
 - was inspired by this
-- 
 
+- text to jitter like in workshop 7
+```
+ function newPage(){
+    background(255, 0, 0);
+    button.hide();
+
+  let jitterX = random(-1.5, 1.5);
+  let jitterY = random(-1.5, 1.5);
+
+  fill(255, 255, 255);
+  textSize(20);
+  textAlign(CENTER, CENTER);
+  
+  text('You should not be here...go', textX + jitterX, textY + jitterY);
+}
+```
+- not working tho
 
 
 
