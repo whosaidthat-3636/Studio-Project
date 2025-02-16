@@ -225,6 +225,7 @@ for (let i = 0; i < eyes.length; i++) {
 }
 ```
 - not working tho
+- update: forgetting variables
 
 
 
