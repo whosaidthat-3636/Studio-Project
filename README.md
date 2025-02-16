@@ -240,7 +240,129 @@ function newPage() {
 - ![GIF](https://github.com/user-attachments/assets/32473b03-fc59-41f2-bd4d-dd1ddf497863)
 - had trouble getting to work for awhile only to realise i forgot the variables
 
-### Changing approach
+### Window resize
+- asking chatgpt to help update object position
+```
+let button;
+let buttonPressed = 0; // 0 = normal, 1 = button pressed
+
+let textX, textY;
+let redEyeX, redEyeY;
+
+function setup() {
+  createCanvas(windowWidth, windowHeight);
+
+  // Set text position
+  textX = windowWidth * 0.5;
+  textY = windowHeight * 0.3;
+
+  // Set red eye position dynamically
+  redEyeX = windowWidth * 0.5;
+  redEyeY = windowHeight * 0.5;
+
+  button = createButton('Oh you found me');
+  button.position(redEyeX + 20, redEyeY + 20); // Closer to red eye
+  button.hide(); // Start hidden
+  button.mousePressed(() => {
+    buttonPressed = 1; // Switch to new page
+  });
+}
+
+function draw() {
+  if (buttonPressed === 1) {
+    newPage(); // Switch to eerie text page
+  } else {
+    mainPage(); // Normal flashlight interaction
+  }
+}
+
+function mainPage() {
+  background(0);
+
+  // Flashlight effect
+  fill(255, 255, 255, 150);
+  noStroke();
+  ellipse(mouseX, mouseY, 80, 80);
+
+  // Eye positions
+  let eyes = [
+    { x: width * 0.1, y: height * 0.15, length: 95 },
+    { x: redEyeX, y: redEyeY, length: 100 }, // Red pupil eye
+    { x: width * 0.75, y: height * 0.3, length: 110 }
+  ];
+
+  let showButton = false; // Track if near red-pupil eye
+
+  strokeWeight(5);
+
+  for (let eye of eyes) {
+    let d = dist(mouseX, mouseY, eye.x, eye.y);
+
+    if (d < 60) { // Only show if within range
+      stroke(255);
+      line(eye.x - eye.length / 2, eye.y, eye.x + eye.length / 2, eye.y);
+
+      if (eye.x === redEyeX) { // Red pupil eye
+        line(eye.x, eye.y, eye.x + 50, eye.y);
+        stroke(255, 0, 0);
+        point(eye.x, eye.y);
+        showButton = true; // Show button when near this eye
+      }
+    }
+  }
+
+  if (showButton) {
+    button.show();
+    button.position(redEyeX + 20, redEyeY + 20); // Ensure it's close to the red eye
+  } else {
+    button.hide();
+  }
+}
+
+function newPage() {
+  background(0);
+  button.hide();
+
+  // Shaky text effect
+  let jitterX = random(-1.5, 1.5);
+  let jitterY = random(-1.5, 1.5);
+
+  fill(255);
+  stroke(0);
+  textSize(20);
+  textAlign(CENTER, TOP);
+  
+  text('Do me a favor, you have to keep on. Whatever it is, DO NOT turn it off', textX + jitterX, textY + jitterY);
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+  
+  // Update positions relative to new window size
+  textX = windowWidth * 0.5;
+  textY = windowHeight * 0.3;
+  redEyeX = windowWidth * 0.5;
+  redEyeY = windowHeight * 0.5;
+  
+  button.position(redEyeX + 20, redEyeY + 20); // Keep button near red eye
+}
+```
+
+### Effect 
+- instead of jitter effect on text
+- replace to button
+```
+ if (showButton) {
+    // Add jitter to button position
+    let jitterX = random(-1.5, 1.5);
+    let jitterY = random(-1.5, 1.5);
+    button.show();
+    button.position(redEyeX + 20 + jitterX, redEyeY + 20 + jitterY); // Shake button
+  } else {
+    button.hide();
+  }
+}
+```
 
 
 
