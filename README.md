@@ -7,6 +7,7 @@
 ### General idea
 - text
 - to flash over eyes
+- button press to change into white background
 
 ## Setup
 - wider width
@@ -19,6 +20,10 @@ function draw() {
   background(0);}
 ```
 ## Iteration 1
+- eyes
+- torch over to appear
+- button pressed to change into white background 
+
 ### Torch
 - fourth parameter is transparency value
 - adding transparency so when hovered over object it plays more into the "torch" effect
@@ -210,22 +215,32 @@ for (let i = 0; i < eyes.length; i++) {
 
 - text to jitter like in workshop 7
 ```
- function newPage(){
-    background(255, 0, 0);
-    button.hide();
+let font1;
+
+let textX = 210;
+let textY = 100;
+
+function preload() {
+  font1 = loadFont('who asks satan.ttf');
+}
+
+function newPage() {
+  background(0);
+  button.hide();
 
   let jitterX = random(-1.5, 1.5);
   let jitterY = random(-1.5, 1.5);
 
   fill(255, 255, 255);
-  textSize(20);
-  textAlign(CENTER, CENTER);
-  
-  text('You should not be here...go', textX + jitterX, textY + jitterY);
-}
+  stroke(0);
+  textAlign(CENTER, TOP);
+  textFont(font1,60);
+  text('LEAVE', textX + jitterX, textY + jitterY);
 ```
-- not working tho
-- update: forgetting variables
+- ![GIF](https://github.com/user-attachments/assets/32473b03-fc59-41f2-bd4d-dd1ddf497863)
+- had trouble getting to work for awhile only to realise i forgot the variables
+
+### Changing approach
 
 
 
