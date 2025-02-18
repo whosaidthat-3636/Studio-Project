@@ -82,7 +82,9 @@ In this project, my aim is to create an artwork based around the theme of intera
 #### Button
 - button to only appear when mouseXY is directed at a certain coordinate
 - this means it could also be AWAY from the button and it would appear, i thought the idea was interesting and could be experimented with down the line
+  
 <img width="162" alt="image" src="https://github.com/user-attachments/assets/b4f75c49-f8bb-46e1-9793-7ae998a0672f" />
+
 ```
 let button;
 
@@ -100,7 +102,7 @@ function setup() {
     button.hide();
   }
 ```
-#### Torch effect
+### Torch effect
 #### Eyes
 - creating an array for the ellipses rather than individually writing code which shouldve been done before 
 ```
@@ -128,7 +130,6 @@ let eyes = [
 - if conditions are unfulfilled and position is at 420
   * two ellipses would be drawn at the almost the same position
   * the two ellipses overlap
-
 ```
 fill(0);
       if (eye.x === 70) {
@@ -186,6 +187,197 @@ function draw() {
   } else {
   background(0);
 ```
+
+### Iteration  2
+#### Line
+- changing ideas
+- replacing ellipses with line
+- lines could be considered eyes shut
+- ellipses that act as "torch" remains
+- I initially changed the value for the if function for torch range
+  * as lines take up lesser surface area so it makes sense for it to be closer
+  * however, it fails to reach the button which means the button disappears past the point where my cursor is at in the picture therefore altered to 55 for it to be easily used
+<img width="184" alt="image" src="https://github.com/user-attachments/assets/05e02353-90a6-4d10-9633-dafe7ca09d9b" />
+
+```
+for (let i = 0; i < eyes.length; i++) {
+      let eye = eyes[i];
+      let d = dist(mouseX, mouseY, eye.x, eye.y);
+      if (d < 60) { // Only show if within torch range
+        stroke(255); // White lines for the eyes
+        line(eye.x - eye.length / 2, eye.y, eye.x + eye.length / 2, eye.y); 
+
+        if (eye.x === 70) {
+          line(60, 70, 100, 70); 
+          line(90, 70, 120, 70); 
+        } else if (eye.x === 280) {
+          line(280, 280, 280 + 50, 280); 
+          stroke(255, 0, 0); 
+          point(280, 280); 
+          showButton = 1;
+        } else if (eye.x === 420) {
+          line(420, 155, 420 + 45, 155); 
+          line(420, 185, 420 + 45, 185);
+```
+
+#### New button condition
+- text to jitter like in workshop 7
+```
+let font1;
+
+let textX = 210;
+let textY = 100;
+
+function preload() {
+  font1 = loadFont('who asks satan.ttf');}
+
+function newPage() {
+  background(0);
+  button.hide();
+
+  let jitterX = random(-1.5, 1.5);
+  let jitterY = random(-1.5, 1.5);
+
+  fill(255, 255, 255);
+  stroke(0);
+  textAlign(CENTER, TOP);
+  textFont(font1,60);
+  text('LEAVE', textX + jitterX, textY + jitterY);
+```
+- ![GIF](https://github.com/user-attachments/assets/32473b03-fc59-41f2-bd4d-dd1ddf497863)
+- had trouble getting to work for awhile only to realise i forgot the variables
+
+#### Window resize
+- asking ChatGPT to help update object position to work with window resize
+```
+function setup() {
+  createCanvas(windowWidth, windowHeight);
+
+ let eyes = [
+    { x: width * 0.1, y: height * 0.15, length: 95 },
+    { x: redEyeX, y: redEyeY, length: 100 }, // Red pupil eye
+    { x: width * 0.75, y: height * 0.3, length: 110 }
+  ];
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+  
+  textX = 20;  
+  textY = 20;
+  redEyeX = windowWidth * 0.5;
+  redEyeY = windowHeight * 0.5;
+  
+  button.position(redEyeX + 20, redEyeY + 20); 
+}
+```
+
+### Final
+![Screenshot_20250218_014537_com_hihonor_notepad_NoteEditorActivity_edit_18336372789617](https://github.com/user-attachments/assets/4a117b84-3797-491a-9661-918bbd2efd3a)
+
+### Updating even newer condition
+- jitter effect onto mainPage on button
+```
+if (showButton) {
+    // Add jitter to button position
+    let jitterX = random(-1.5, 1.5);
+    let jitterY = random(-1.5, 1.5);
+    button.show();
+    button.position(redEyeX + 20 + jitterX, redEyeY + 20 + jitterY); // Shake button
+  } else {
+    button.hide();
+```
+
+### NewPage
+- I felt like I wasn't putting enough effort into creating a jarring and restricting experience I had in mind so going for a different approach
+- switching to white background and lamp object to feel like user has turned on light
+- instruction that supposedly guides users
+```
+function newPage() {
+  background(255, 255, 255);
+  button.hide(); 
+
+  drawLamp();
+
+  fill(0);
+  stroke(0); 
+  strokeWeight(1);
+  textSize(16); 
+  textAlign(LEFT, TOP);  
+  
+  text('Since you are here do me a favour, you have to it keep on.', textX, textY);
+  text('Whatever it is, DO NOT turn it off.', textX, textY + 30);
+
+  button = createButton('OFF');
+  button = createButton('Keep On');
+  button.position(340, 710);
+}
+
+function drawLamp() {
+  let lineX = windowWidth - 40; 
+  
+  strokeWeight(3); 
+  stroke(255, 255, 0); 
+  line(lineX, 0, lineX, height);
+
+  noFill(); 
+  beginShape();
+  vertex(lineX - 15, height); // Left point of the triangle
+  vertex(lineX + 15, height); // Right point of the triangle
+  vertex(lineX, height - 30); // Top point of the triangle (at the line end)
+  endShape(CLOSE);
+
+  //curved bottom edge
+  stroke(255, 255, 0); 
+  noFill(); 
+  arc(lineX, height, 30, 30, 0, PI);
+  //glow effect
+  fill(255, 255, 0, 100);  
+  noStroke(); 
+  ellipse(lineX, height - 30, 80, 80); 
+}
+```
+### The Button Saga
+#### Beginning 
+- something interesting popped up before I placed any condition for the buttons
+- this occured as I hadn't put down a specific button position
+- liked the idea and wanted to continue with it to give a sense of overwhelm
+<img width="748" alt="image" src="https://github.com/user-attachments/assets/3ba8d41a-8845-4d82-a431-652362bbde37" />
+
+### Adding condition
+![Notepad_202502180917_52269](https://github.com/user-attachments/assets/121bceca-fe0f-48c4-99f3-a646fd393083)
+- inspo for it [https://github.com/ivysone/Will-you-be-my-Valentine-]
+- attempted to follow but it didnt work at all
+- and when it did the rows and rows of ON buttons would disappear having only one ON button which wasn't ideal
+
+### Foregoing intial idea
+- improvised because it felt stale to continue only having one button
+- have ON button scattered on canvas but having a high framerate so its basically impossible to click
+- OFF button blatantly obvious but added text just in case user believed that was it
+```
+fill(255, 255, 255, 250);
+  text('You know what you have to do...', textX, textY + 500);
+
+function showRandomButton(button) {
+  let randomX = random(50, width - 150);
+  let randomY = random(50, height - 80);
+  button.position(randomX, randomY);
+  button.show();
+}
+
+function handleOnClick() {
+  const currentSize = parseFloat(window.getComputedStyle(offButton.elt).fontSize);
+  offButton.style.fontSize = `${currentSize * 1.5}px`;
+}
+```
+
+### Last page
+- the idea was to have images i found replicate similar effects i did for my workshop 3, sound will loop as well i the back
+- i wrote it in a seperate sketch as my code was getting overwhemling
+- i later expanded with adding grain effects and to let the images gradually be on canvas rather than all in one go for a smoother effect
+
+
+
+
 
 
 
