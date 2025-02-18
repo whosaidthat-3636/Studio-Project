@@ -1,6 +1,7 @@
 let button;
+let restartButton; 
 let onButton, offButton;
-let buttonPressed = 0; // 0 = normal, 1 = first page, 2 = second page
+let buttonPressed = 0; // 0 = normal, 1 = first eerie page, 2 = second eerie page
 let textX, textY;
 let redEyeX, redEyeY;
 
@@ -10,6 +11,7 @@ let song1, song2, song3;
 let visibleImages = 1;
 let phase = 1;
 let phaseTimer = 0;
+let buttonVisible = false; 
 
 function preload() {
   img1 = loadImage('images/img1.jpeg');
@@ -26,6 +28,7 @@ function preload() {
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  frameRate(60); // Set a fixed framerate
 
   textX = 20;
   textY = 20;
@@ -48,6 +51,15 @@ function setup() {
   offButton.mousePressed(() => {
     buttonPressed = 2;
   });
+
+  restartButton = createButton('RESTART');
+  restartButton.size(120, 50);
+  restartButton.style("font-size", "18px");
+  restartButton.style("background-color", "#000000");
+  restartButton.style("color", "red");
+  restartButton.style("border", "none");
+  restartButton.style("border-radius", "8px");
+  restartButton.hide(); 
 
   images.push(img1, img2, img3, img4, img5, img6);
 }
@@ -171,7 +183,6 @@ function newPage2() {
         phase = 3;
       }
     } else if (phase === 3) {
-      frameRate(random(10, 60));
     }
   }
 
@@ -182,7 +193,24 @@ function newPage2() {
   }
 
   addGrain(visibleImages * 5);
+
+  toggleRestartButton();
 }
+
+function toggleRestartButton() {
+  let randomX = random(50, windowWidth - 150);
+  let randomY = random(50, windowHeight - 80);
+
+  restartButton.position(randomX, randomY);
+  restartButton.show(); 
+
+  setTimeout(() => {
+    restartButton.hide(); 
+    setTimeout(toggleRestartButton, 500); 
+  }, 300);
+}
+
+toggleRestartButton();
 
 function addGrain(intensity) {
   loadPixels();
