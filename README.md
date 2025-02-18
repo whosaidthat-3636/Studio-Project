@@ -437,6 +437,8 @@ function addGrain(intensity) {
   updatePixels();
 }
 ```
+### Restart button
+- 
 
 ### Housekeeping
 - after integrating and the code working for the most part
