@@ -1,6 +1,7 @@
 # Studio-Project
 
-Warning: loud sounds and flashing images
+**Warning: volume warning and flashing images**
+
 Link: 
 
 Theme: Interactivity
