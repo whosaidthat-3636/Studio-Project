@@ -62,7 +62,7 @@ In this project, my aim is to create an artwork based around the theme of intera
   ellipse(mouseX, mouseY, 80, 80);
 ```
 
-### Eyes
+#### Eyes
 - writing individual
 - fill over certain ellipses to obtain color
 ```
@@ -343,13 +343,13 @@ function drawLamp() {
 - liked the idea and wanted to continue with it to give a sense of overwhelm
 <img width="748" alt="image" src="https://github.com/user-attachments/assets/3ba8d41a-8845-4d82-a431-652362bbde37" />
 
-### Adding condition
+#### Adding condition
 ![Notepad_202502180917_52269](https://github.com/user-attachments/assets/121bceca-fe0f-48c4-99f3-a646fd393083)
 - inspo for it [https://github.com/ivysone/Will-you-be-my-Valentine-]
 - attempted to follow but it didnt work at all
 - and when it did the rows and rows of ON buttons would disappear having only one ON button which wasn't ideal
 
-### Foregoing intial idea
+#### Foregoing intial idea
 - improvised because it felt stale to continue only having one button
 - have ON button scattered on canvas but having a high framerate so its basically impossible to click
 - OFF button blatantly obvious but added text just in case user believed that was it
@@ -363,17 +363,89 @@ function showRandomButton(button) {
   button.position(randomX, randomY);
   button.show();
 }
-
-function handleOnClick() {
-  const currentSize = parseFloat(window.getComputedStyle(offButton.elt).fontSize);
-  offButton.style.fontSize = `${currentSize * 1.5}px`;
-}
 ```
 
 ### Last page
-- the idea was to have images i found replicate similar effects i did for my workshop 3, sound will loop as well i the back
-- i wrote it in a seperate sketch as my code was getting overwhemling
+- the idea was to have images i found replicate similar effects i did for my workshop 3
+- sound will loop in the back
+- i wrote it in a seperate sketch because my code was getting overwhemling
+- no major issues with writing it 
 - i later expanded with adding grain effects and to let the images gradually be on canvas rather than all in one go for a smoother effect
+- the biggest problem i faced was only getting this part, it was really hard for me to articulate how to integrate the code
+- based on the valentine button inspo there was an option that took users to a different page but as I looked further into it, it had to be an html file which I wasn't sure how to go about so I had to just combine them
+- alot of trial and error with order of operations
+```
+let img1, img2, img3, img4, img5, img6;
+let images = [];
+let song1, song2, song3;
+let visibleImages = 1;
+let phase = 1;
+let phaseTimer = 0;
+
+function preload() {
+  img1 = loadImage('images/img1.jpeg');
+  img2 = loadImage('images/img2.jpeg');
+  img3 = loadImage('images/img3.jpeg');
+  img4 = loadImage('images/img4.jpeg');
+  img5 = loadImage('images/img5.jpeg');
+  img6 = loadImage('images/img6.jpeg');
+
+  song1 = loadSound('sound/3500Hz.mp3');
+  song2 = loadSound('sound/malfunction.mp3');
+  song3 = loadSound('sound/projector.mp3');
+}
+
+function newPage2() {
+  background(255);
+  song1.loop();
+  song2.loop();
+  song3.loop();
+
+  if (millis() - phaseTimer > 3000) {
+    phaseTimer = millis();
+    if (phase === 1) {
+      visibleImages++;
+      if (visibleImages >= 3) phase = 2;
+    } else if (phase === 2) {
+      visibleImages *= 2;
+      if (visibleImages >= images.length) {
+        visibleImages = images.length;
+        phase = 3;
+      }
+    } else if (phase === 3) {
+      frameRate(random(10, 60));
+    }
+  }
+
+  for (let i = 0; i < visibleImages; i++) {
+    let ranX = random(width - 80);
+    let ranY = random(height - 80);
+    image(images[i % images.length], ranX, ranY);
+  }
+
+  addGrain(visibleImages * 5);
+}
+
+function addGrain(intensity) {
+  loadPixels();
+  for (let i = 0; i < pixels.length; i += 4) {
+    let grain = random(-intensity, intensity);
+    pixels[i] += grain;
+    pixels[i + 1] += grain;
+    pixels[i + 2] += grain;
+  }
+  updatePixels();
+}
+```
+
+### Housekeeping
+- after integrating and the code working for the most part
+- there were some overlapping parts not where they were meant to be and made necessary changes to have my proper final outcome
+
+## Final reflection
+I am somewhat satisfied with my outcome but acknowledge there so much more that could be done. I paid the least attention to the mainPage so it does fall a bit flat in terms of experience. The troubles I faced were frustrating because it is either I had forgotten to add in something that causes the whole thing to be defective or the order of operations. I am entirely lost when it comes to window width height and how to write so that the elements will follow suit by the window size. Another problem was putting all the code together. Maybe I should have been a lot more flexible with my ideas because I might have put myself in a box and refusing to let ogo. Other than that, it was a learning experience to say the least. 
+
+
 
 
 
